@@ -1,8 +1,8 @@
 package test;
-import java.util.HashMap;
-import java.util.Map;
 
-import quickforms.ruleEngine.RuleEngine;
+import quickforms.ruleEngine.RuleSetIdentifier;
+import quickforms.ruleEngine.api.Request;
+import quickforms.ruleEngine.api.RuleEngine;
 
 
 public class TestMain {
@@ -11,11 +11,13 @@ public class TestMain {
 		
 		RuleEngine ruleEngine = new RuleEngine();
 		
-		ruleEngine.addRule(new AssignToPhysicianRule());
+		RuleSetIdentifier appName = new RuleSetIdentifier("testProcess");
 		
-		Map<String, String> params = new HashMap<String, String>();
+		ruleEngine.addRule(appName, new AssignToPhysicianRule());
 		
-		ruleEngine.executeRules(params);
+		Request req = new Request();
+		
+		ruleEngine.routeRequest(appName, req);
 		
 	}
 
