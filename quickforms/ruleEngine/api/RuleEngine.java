@@ -2,6 +2,7 @@ package quickforms.ruleEngine.api;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import quickforms.ruleEngine.RuleSet;
 import quickforms.ruleEngine.RuleSetIdentifier;
@@ -9,10 +10,13 @@ import quickforms.ruleEngine.XMLRuleSet;
 
 public class RuleEngine {
 
-	
+	private static final Logger LOGGER = Logger.getLogger(RuleEngine.class.getName());
+
 	Map<RuleSetIdentifier, RuleSet> ruleSetMap;
 	
 	public RuleEngine() {
+		// LOGGER.setLevel(Level.OFF);
+		
 		ruleSetMap = new HashMap<>();
 	}
 	
@@ -22,6 +26,7 @@ public class RuleEngine {
 		}
 		
 		ruleSetMap.get(identifier).addRule(toAdd);
+		LOGGER.info("Added new rule");
 	}
 	
 	public void loadRulesFromXML(RuleSetIdentifier identifier, XMLRuleSet toLoad) {
